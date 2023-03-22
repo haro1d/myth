@@ -1,0 +1,55 @@
+html, body {
+  height:  100%;
+  width: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul, li {
+  list-style: none;
+}
+.flex{
+  display: flex;
+}
+.items-center{
+  align-items: center;
+}
+.justify-between{
+  justify-content: space-between;
+}
+@font-face{
+  font-family: bird;
+  src: url("/font/飞鸟.ttf");
+}
+@font-face{
+  font-family: cat;
+  src: url("/font/卷耳猫.ttf");
+}
+@font-face{
+  font-family: liuguang;
+  src: url("/font/流光.ttf");
+}
+@font-face{
+  font-family: shoujin;
+  src: url("/font/瘦金.ttf");
+}
+@font-face{
+  font-family: canglang;
+  src: url("/font/沧浪行楷.ttf");
+}
+@font-face{
+  font-family: chungui;
+  src: url("/font/春归.ttf");
+}
+@font-face{
+  font-family: wendao;
+  src: url("/font/问道黑.ttf");
+}
+@font-face{
+  font-family: yanbo;
+  src: url("/font/烟波宋.ttf");
+}
