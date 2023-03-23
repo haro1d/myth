@@ -6,6 +6,7 @@
 4
 5
 test1
+test2
     </div>
 </template>
 
