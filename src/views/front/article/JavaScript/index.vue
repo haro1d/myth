@@ -1,5 +1,6 @@
 <template>
     <div>
+<<<<<<< HEAD
 1
 2
 3
@@ -13,6 +14,9 @@ test2
     1
     2
 </div>
+=======
+
+>>>>>>> parent of 3bedd50 (1)
     </div>
 </template>
 
