@@ -10,6 +10,7 @@ test2
 <div>
     李四模块
     1
+    2
 </div>
     </div>
 </template>
