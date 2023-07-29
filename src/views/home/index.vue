@@ -21,6 +21,7 @@
                 </div>
             </div>
             <div id="three"></div>
+            <div id="circle"></div>
         </div>
         
     </div>
@@ -34,9 +35,63 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 onMounted(() => {
     threeInit()
+    createSlices(10);
 })
 
 const router = useRouter()
+function createSlices(n) {
+  const circle = document.getElementById("circle");
+  while (circle.firstChild) {
+    circle.removeChild(circle.firstChild);
+  }
+
+  for (let i = 0; i < n; i++) {
+    const slice = document.createElement("div");
+    slice.className = "slice";
+    slice.style.backgroundColor = getRandomColor();
+    // slice.style.transformOrigin = "50% 100%";
+    slice.style.transform = `rotate(${360 / n * i}deg)`;
+    slice.style['clip-path'] = `polygon(50% 50%, 50% 0, 100% 0)`;
+    if(n>=4 && n<8){
+        const perc = ((1 - Math.tan((90 - (360 / n)) * Math.PI / 180))) / 2
+        //扇形数量[4,8]，角度[45,90]
+        slice.style['clip-path'] = `polygon(50% 50%, 50% 0, 100% 0, 100% ${100 * perc}%)`;
+    }
+    else if(n>=8){
+        const perc = ((Math.tan((360 / n) * Math.PI / 180))+1) / 2
+        //扇形数量大于等于8的时候，角度<=45度，才可以用这个算法
+        slice.style['clip-path'] = `polygon(50% 50%, 50% 0, ${100 * perc}% 0)`;
+    }
+    const textElement = document.createElement("div");
+    textElement.innerHTML = "文案" + i; // 替换为你想要的文案内容
+    textElement.style['writing-mode'] = 'vertical-rl'
+    textElement.style.color = '#fff'
+    textElement.style.position = 'relative'
+    textElement.style.top = '-6px'
+    textElement.style.width = '136px'
+    textElement.style.transform = 'rotate(16deg)'
+    slice.appendChild(textElement);
+
+     // 添加点击事件
+    slice.addEventListener("click", function() {
+      handleClick(i);
+    });
+    circle.appendChild(slice);
+  }
+}
+function handleClick(i){
+    console.log("i", i);
+}
+function getRandomColor() {
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+
 
 const threeInit = ()=>{
     const scene = new THREE.Scene();
@@ -105,6 +160,19 @@ let state = reactive({
 const { iconArr } = toRefs(state)
 </script>
 
+<style lang="less">
+.slice {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+cursor: pointer;
+    &:hover{
+        filter: brightness(80%);
+    }
+}
+</style>
 <style lang="less" scoped>
 #home{
     height: 100vh;
@@ -247,4 +315,13 @@ const { iconArr } = toRefs(state)
 .tool-leave-from {
   opacity: 1;
 }
+#circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+
 </style>
